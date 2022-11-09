@@ -28,3 +28,25 @@ print(df.shape[0])
 print(df.shape[1])
 
 df.head()
+
+#Data Overview
+
+print(f"Rows    : {df.shape[0]}")
+print(f"Columns : {df.shape[1]}")
+print()
+
+#Print the column names 
+print (f"features : {df.columns.tolists()}")
+print()
+
+#Print the total number of null values in the data 
+print(f"Missing values  : {df.isnull().sum().values.sum()}")
+
+#For each column, print the number of unique values
+print(f"Unique values : {df.nunique()}")
+
+#Descriptive statistics for continuous variables 
+print(df.describe())
+
+
+
