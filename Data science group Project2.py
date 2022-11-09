@@ -48,5 +48,26 @@ print(f"Unique values : {df.nunique()}")
 #Descriptive statistics for continuous variables 
 print(df.describe())
 
+#correlation
+#correlation plot
+correlatio=df.corr
+print(correlation)
+
+plt.bar(df['Reservoir'],df['Mercury'])
+plt.show()
+plt.scatter(df["Dam"],df['Mercury'])
+plt.show()
+plt.scatter(df['Drainage Area'],df['Mercury'])
+plt.show()
+
+#to drop rows with duplicate values
+print(df.shape)
+df.drop_duplicates(inplace=True)
+df.reset_index(drop=True, inplace=True)
+print(df.shape)
+
+
+
+
 
 
