@@ -117,6 +117,21 @@ pc_outliers=round(num_outliers*100/total,2)
 print(f"Num outliers: {num_outliers},total rows: {total},percent:{pc_outliers}")
 print()
 
+#Replace outliers with median
+columns = ['Fish','Mercury','Elevation','Drainage Area','Surface Area','Max Depth','RF','FR','Dam','RT','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS','LONGITUDE_DEGREES','LONGITUDE_MINUTES','LONGITUDE_SECONDS']
+print(columns)
+print()
+for col in columns:
+    median_val = df[col].quantile(0.50)
+    percentile_25 = df[col].quantile(0.25)
+    percentile_75 = df[col].quantile(0.75)
+    iqr = percentile_75 - percentile_25 # Inter Quartile Range
+    cut_off = iqr * 1.5  # normally use 1.5 times IQR
+    lower, upper = percentile_25 - cut_off, percentile_75 + cut_off
+    print(f"col: {col}, lower: {lower}, upper: {upper},  median_val: {median_val}")
+df[col] = np.where((df[col] < lower) | (df[col] > upper), median_val, df[col])
+print(df.describe())
+
 
 
 
