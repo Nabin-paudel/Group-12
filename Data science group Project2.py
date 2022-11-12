@@ -132,6 +132,62 @@ for col in columns:
 df[col] = np.where((df[col] < lower) | (df[col] > upper), median_val, df[col])
 print(df.describe())
 
+import joblib
+from sklearn.model_selection import train_test_split 
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import roc_curve
+from sklearn.metrics import auc
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+feature_cols = ['Fish','Elevation','Drainage Area','Surface Area','Max Depth','RF','FR','Dam','RT','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS','LONGITUDE_DEGREES','LONGITUDE_MINUTES','LONGITUDE_SECONDS']
+
+X = df[feature_cols]
+#Dimesion of dataset
+y = df.Mercury
+X.shape, y.shape
+print(y)
+
+#Splitting dataset into training and testing
+from sklearn.model_selection import train_test_split
+x_train, x_cv, y_train, y_cv = train_test_split(X,y, test_size = 0.2, random_state = 10)
+
+x_train.shape
+y_train.shape
+x_cv.shape
+y_cv.shape
+
+from sklearn.linear_model import LinearRegression
+
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit(x_train, y_train)
+
+#Model evaluation on testing dataset
+from sklearn.metrics import accuracy_score
+pred_cv = model.predict(x_cv)
+print('True:', y_cv.values[0:25])
+print('Pred:', pred_cv[0:25])
+
+print(model.score(x_cv, y_cv))
+
+pred_cv = model.predict(x_cv)
+
+from sklearn.metrics import mean_absolute_error,mean_squared_error
+  
+mae = mean_absolute_error(y_true=y_cv,y_pred=pred_cv)
+#squared True returns MSE value, False returns RMSE value.
+mse = mean_squared_error(y_true=y_cv,y_pred=pred_cv) #default=True
+rmse = mean_squared_error(y_true=y_cv,y_pred=pred_cv,squared=False)
+  
+print("MAE:",mae)
+print("MSE:",mse)
+print("RMSE:",rmse)
 
 
 
