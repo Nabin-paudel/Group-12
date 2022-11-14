@@ -189,6 +189,61 @@ print("MAE:",mae)
 print("MSE:",mse)
 print("RMSE:",rmse)
 
+import statsmodels.api as sm
+
+x_train= sm.add_constant(x_train)
+
+#fit linear regression model
+model= sm.OLS(y_train, x_train).fit()
+
+#view model summary
+print(model.summary())
+
+""" We remove all the features that have p values higher than 0.5"""
+
+X_train=X_train.copy()
+X_test=X_cv.copy()
+
+Selected colums =['Fish','Elevation','Drainage Area','Surface Area','RF','Dam','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS','LONGITUDE_MINUTES']
+
+X= df[selected_columns]
+#Dimesion of dataset
+y= df. Mercury
+X.shape, y.shape
+
+#Splitting dataset into training and testing 
+from sklelearn.model_selection  import train_test_split 
+X_train, X_cv, Y_train,Y_cv=train_test_split(X,y, test_size=0.2, random_state=10)
+
+Model evaluation on testing dataset
+from sklearn.metrics import accuracy_score
+pred_cv =model.predict(x,y)
+print ('True:', y_cv.values[0:25])
+print ('Pred;', pred_cv[0:25])
+
+print(model.score(X_cv, y_cv))
+
+pred_cv= model.predict(X_cv)
+
+from sklearn.metrics imports mean_absolute_error,mean_squared_error
+
+mae= mmean_absolute_error(Y_true=Y_cv, Y_pred=Pred_cv)
+# Squared True returns MSE value, False return RMSE value.
+mse=mean_squared_error(Y_true=Y_cv,Y_pred=Pred_cv) # default=True
+rmse=mean_squared_error(Y_true=Y_cv,Y_pred=Pred_cv,squared=False)
+
+print("MAE:",mae)
+print("MSE:",mse)
+print("RMSE:",rmse)
+
+
+
+
+
+
+
+
+
 
 
 
