@@ -5,15 +5,18 @@ import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
 import numpy as np
+#%matplotlib incline
 import pandas as pd
+
 np.random.seed(10)
+
 import seaborn as sns
 
 #importing libraries
-from skleaarn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn import svm
 from sklearn.metrics import accuracy_score
-import matplotlip.pyplot as plt
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('fair_new.csv')
 print(df)
@@ -50,7 +53,7 @@ print(df.describe())
 
 #correlation
 #correlation plot
-correlatio=df.corr
+correlation=df.corr
 print(correlation)
 
 plt.bar(df['Reservoir'],df['Mercury'])
@@ -98,10 +101,10 @@ correlation=df.corr()
 print(correlation)
 
 plt.figure(figsize=(14,14))
-sns.heat,ap(correlation,annot=True,linwidth=0.01,vmax=1,square=True,cbar=True);
+sns.heat,map(correlation,annot=True,linwidth=0.01,vmax=1,square=True,cbar=True);
 sns.heatmap
 
-columns=['fISH','Mercury','Elevation','Drainage Area','Surface Area','Max Depth','RF','FR','Dam','RT','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS',LONGITUDE_DEGREES','LONGITUDE_MINUTES,'LONGITUDE_SECONDS']
+columns=['Fish','Mercury','Elevation','Drainage Area','Surface Area','Max Depth','RF','FR','Dam','RT','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS','LONGITUDE_DEGREES','LONGITUDE_MINUTES','LONGITUDE_SECONDS']
 print(columns)
 print()
 for col in columns:
@@ -201,10 +204,10 @@ print(model.summary())
 
 """ We remove all the features that have p values higher than 0.5"""
 
-X_train=X_train.copy()
-X_test=X_cv.copy()
+X_train=x_train.copy()
+X_test=x_cv.copy()
 
-Selected colums =['Fish','Elevation','Drainage Area','Surface Area','RF','Dam','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS','LONGITUDE_MINUTES']
+selected_columns =['Fish','Elevation','Drainage Area','Surface Area','RF','Dam','RS','LATITUDE_DEGREES','LATITUDE_MINUTES','LATITUDE_SECONDS','LONGITUDE_MINUTES']
 
 X= df[selected_columns]
 #Dimesion of dataset
@@ -212,12 +215,12 @@ y= df. Mercury
 X.shape, y.shape
 
 #Splitting dataset into training and testing 
-from sklelearn.model_selection  import train_test_split 
+from sklearn.model_selection  import train_test_split 
 X_train, X_cv, Y_train,Y_cv=train_test_split(X,y, test_size=0.2, random_state=10)
 
-Model evaluation on testing dataset
+#Model evaluation on testing dataset
 from sklearn.metrics import accuracy_score
-pred_cv =model.predict(x,y)
+pred_cv =model.predict(x_cv)
 print ('True:', y_cv.values[0:25])
 print ('Pred;', pred_cv[0:25])
 
@@ -225,12 +228,12 @@ print(model.score(X_cv, y_cv))
 
 pred_cv= model.predict(X_cv)
 
-from sklearn.metrics imports mean_absolute_error,mean_squared_error
+from sklearn.metrics import mean_absolute_error,mean_squared_error
 
-mae= mmean_absolute_error(Y_true=Y_cv, Y_pred=Pred_cv)
+mae= mean_absolute_error(Y_true=Y_cv, Y_pred=pred_cv)
 # Squared True returns MSE value, False return RMSE value.
-mse=mean_squared_error(Y_true=Y_cv,Y_pred=Pred_cv) # default=True
-rmse=mean_squared_error(Y_true=Y_cv,Y_pred=Pred_cv,squared=False)
+mse=mean_squared_error(Y_true=Y_cv,Y_pred=pred_cv) # default=True
+rmse=mean_squared_error(Y_true=Y_cv,Y_pred=pred_cv,squared=False)
 
 print("MAE:",mae)
 print("MSE:",mse)
