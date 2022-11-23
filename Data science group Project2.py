@@ -39,7 +39,7 @@ print(f"Columns : {df.shape[1]}")
 print()
 
 #Print the column names 
-print (f"features : {df.columns.tolists()}")
+print (f"features : {df.columns.tolist()}")
 print()
 
 #Print the total number of null values in the data 
